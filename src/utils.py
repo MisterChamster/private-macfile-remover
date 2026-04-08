@@ -34,14 +34,22 @@ def get_dirs_from_dir(dir_path: Path) -> list[Path]:
 
 
 def get_macfile_paths_dir(dir_path: Path) -> list[Path]:
+    macfiles_paths = []
     files_paths = get_files_from_dir(dir_path)
 
     for node_path in files_paths:
-        pass
+        if is_file_macfile(node_path):
+            macfiles_paths.append(node_path)
+
+    return macfiles_paths
 
 
 def get_not_macfile_paths_dir(dir_path: Path) -> list[Path]:
+    not_macfiles_paths = []
     files_paths = get_files_from_dir(dir_path)
 
     for node_path in files_paths:
-        pass
+        if not is_file_macfile(node_path):
+            not_macfiles_paths.append(node_path)
+
+    return(not_macfiles_paths)
