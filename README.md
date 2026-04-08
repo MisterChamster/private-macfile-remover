@@ -3,7 +3,7 @@ A simple app for removing hidden files created by macOS.
   
 ## Installation
 ```bash
-git clone https://github.com/MisterChamster/private-appledouble-remover.git macfile-remover
+git clone https://github.com/MisterChamster/private-macfile-remover.git macfile-remover
 cd macfile-remover
 ```
 
