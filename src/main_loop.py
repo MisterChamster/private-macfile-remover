@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import src.askers as askers
+import src.file_removers as removers
 
 
 
@@ -19,10 +20,10 @@ def main_loop() -> None:
             removal_path = Path(removal_path)
 
         if removal_style == "normal_deleting":
-            pass
+            removers.remove_macfiles_dir(removal_path)
         elif removal_style == "normal_deleting_recursive":
             pass
         elif removal_style == "cautious_deleting":
-            pass
+            removers.cautious_remove_macfiles_dir(removal_path)
         elif removal_style == "cautious_deleting_recursive":
             pass
