@@ -1,6 +1,7 @@
 from typing  import Literal
 from pathlib import Path
 from tkinter import filedialog
+import os
 
 
 
@@ -36,7 +37,10 @@ def ask_removal_style() -> Literal[
             print("Invalid input\n\n")
 
 
-def ask_path_filedialog() -> Path | None:
+def ask_path_filedialog(start_path: Path) -> Path | None:
+    og_path = Path.cwd()
+    os.chdir(start_path)
+
     selected_path = ""
     message = "Choose audio directory"
     selected_path = filedialog.askdirectory(title=message)
@@ -45,4 +49,5 @@ def ask_path_filedialog() -> Path | None:
         return
     selected_path = Path(selected_path)
 
+    os.chdir(og_path)
     return selected_path
