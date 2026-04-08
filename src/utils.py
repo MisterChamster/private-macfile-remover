@@ -15,6 +15,17 @@ def is_filename_macfile(filename: str) -> bool:
     return False
 
 
+def is_file_dsstore(filepath: Path) -> bool:
+    filename = filepath.name
+    return is_filename_dsstore(filename)
+
+
+def is_filename_dsstore(filename: str) -> bool:
+    if filename.startswith("DS_Store"):
+        return True
+    return False
+
+
 def get_files_from_dir(dir_path: Path) -> list[Path]:
     files_paths = []
 
