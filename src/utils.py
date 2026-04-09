@@ -21,7 +21,8 @@ def is_file_dsstore(filepath: Path) -> bool:
 
 
 def is_filename_dsstore(filename: str) -> bool:
-    if filename.startswith("DS_Store"):
+    if (filename.startswith(".DS_Store") or
+        filename.startswith("._.DS_Store")):
         return True
     return False
 
