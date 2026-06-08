@@ -4,25 +4,19 @@ from pathlib import Path
 
 def is_file_macfile(filepath: Path) -> bool:
     filename = filepath.name
-    return is_filename_macfile(filename)
-
-
-def is_filename_macfile(filename: str) -> bool:
-    if filename.startswith("DS_Store"):
-        return True
-    if filename.startswith("._"):
+    if (__is_filename_dsstore(filename) or
+        filename.startswith("._")):
         return True
     return False
 
 
 def is_file_dsstore(filepath: Path) -> bool:
     filename = filepath.name
-    return is_filename_dsstore(filename)
+    return __is_filename_dsstore(filename)
 
 
-def is_filename_dsstore(filename: str) -> bool:
-    if (filename.startswith(".DS_Store") or
-        filename.startswith("._.DS_Store")):
+def __is_filename_dsstore(filename: str) -> bool:
+    if filename.startswith((".DS_Store", "._.DS_Store")):
         return True
     return False
 
