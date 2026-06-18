@@ -1,8 +1,7 @@
 from pathlib import Path
 
 import src.askers as askers
-import src.file_removers as removers
-from src.recurrer import Recurrer
+from src.dir_remover import DirRemover
 
 
 
@@ -21,10 +20,14 @@ def main_loop() -> None:
             removal_path = Path(removal_path)
 
         if removal_style == "normal_deleting":
-            removers.remove_macfiles_dir(removal_path)
+            DirRemover.remove_macfiles_dir(removal_path)
+            print(f"{DirRemover.get_and_reset_del_count()} appledouble files have been successfully deleted.\n")
         elif removal_style == "normal_deleting_recursive":
-            Recurrer.remove_macfiles_recur(removal_path)
+            DirRemover.remove_macfiles_recur(removal_path)
+            print(f"{DirRemover.get_and_reset_del_count()} appledouble files have been successfully deleted.\n")
         elif removal_style == "cautious_deleting":
-            removers.cautious_remove_macfiles_dir(removal_path)
+            DirRemover.cautious_remove_macfiles_dir(removal_path)
+            print(f"{DirRemover.get_and_reset_del_count()} appledouble files have been successfully deleted.\n")
         elif removal_style == "cautious_deleting_recursive":
-            Recurrer.cautious_remove_macfiles_recur(removal_path)
+            DirRemover.cautious_remove_macfiles_recur(removal_path)
+            print(f"{DirRemover.get_and_reset_del_count()} appledouble files have been successfully deleted.\n")
