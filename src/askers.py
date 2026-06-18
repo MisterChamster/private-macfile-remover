@@ -16,7 +16,7 @@ def ask_removal_style() -> Literal[
         "nr": "normal_deleting_recursive",
         "c":  "cautious_deleting",
         "cr": "cautious_deleting_recursive",
-        "e":  "exit"}
+        "x":  "exit"}
 
     while True:
         print("Normal deleting means deleting all DS_Store files and ones starting with '._'\n"
@@ -27,7 +27,7 @@ def ask_removal_style() -> Literal[
               "nr - Normal deleting (recursive)\n"
               "c  - Cautious deleting\n"
               "cr - Cautious deleting (recursive)\n"
-              "e  - Exit\n"
+              "x  - Exit\n"
               ">> ", end="")
         asker = input().strip().lower()
 
