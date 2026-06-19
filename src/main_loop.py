@@ -21,13 +21,13 @@ def main_loop() -> None:
 
         if removal_style == "normal_deleting":
             DirRemover.remove_macfiles_dir(removal_path)
-            print(f"{DirRemover.get_and_reset_del_count()} appledouble files have been successfully deleted.\n")
+            DirRemover.print_and_reset_all_kb()
         elif removal_style == "normal_deleting_recursive":
             DirRemover.remove_macfiles_recur(removal_path)
-            print(f"{DirRemover.get_and_reset_del_count()} appledouble files have been successfully deleted.\n")
+            DirRemover.print_and_reset_all_kb()
         elif removal_style == "cautious_deleting":
             DirRemover.cautious_remove_macfiles_dir(removal_path)
-            print(f"{DirRemover.get_and_reset_del_count()} appledouble files have been successfully deleted.\n")
+            DirRemover.print_and_reset_all_kb()
         elif removal_style == "cautious_deleting_recursive":
             DirRemover.cautious_remove_macfiles_recur(removal_path)
-            print(f"{DirRemover.get_and_reset_del_count()} appledouble files have been successfully deleted.\n")
+            DirRemover.print_and_reset_all_kb()

@@ -6,6 +6,7 @@ import src.utils as utils
 
 class DirRemover():
     del_counter = 0
+    bytes_deleted = 0
 
 
     @staticmethod
@@ -15,6 +16,7 @@ class DirRemover():
             if utils.is_file_macfile(node_path):
                 os.remove(node_path)
                 DirRemover.del_counter += 1
+                bytes_deleted += node_path.stat().st_size
 
 
     @staticmethod
@@ -24,6 +26,7 @@ class DirRemover():
             if utils.is_file_dsstore(node_path):
                 os.remove(node_path)
                 DirRemover.del_counter += 1
+                bytes_deleted += node_path.stat().st_size
 
 
     @staticmethod
@@ -42,6 +45,7 @@ class DirRemover():
         for macfile_path in paths_to_remove:
             os.remove(macfile_path)
             DirRemover.del_counter += 1
+            bytes_deleted += macfile_path.stat().st_size
 
 
     @staticmethod
@@ -68,3 +72,26 @@ class DirRemover():
         temp = DirRemover.del_counter
         DirRemover.del_counter = 0
         return temp
+
+    @staticmethod
+    def get_and_reset_bytes() -> int:
+        temp = DirRemover.bytes_deleted
+        DirRemover.bytes_deleted = 0
+        return temp
+
+    @staticmethod
+    def print_and_reset_all_b() -> None:
+        del_count = DirRemover.get_and_reset_del_count()
+        del_bytes = DirRemover.get_and_reset_bytes()
+
+        print(f"{del_count} appledouble files have been successfully deleted.")
+        print(f"{del_bytes}B of files have been deleted.")
+
+    @staticmethod
+    def print_and_reset_all_kb() -> None:
+        del_count = DirRemover.get_and_reset_del_count()
+        del_bytes = DirRemover.get_and_reset_bytes()
+        del_kbytes = round(del_bytes / 1000)
+
+        print(f"{del_count} appledouble files have been successfully deleted.")
+        print(f"{del_kbytes}kB of files have been deleted.")
