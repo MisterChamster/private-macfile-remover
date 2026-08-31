@@ -14,9 +14,9 @@ class DirRemover():
         files_paths = utils.get_files_from_dir(dir_path)
         for node_path in files_paths:
             if utils.is_file_macfile(node_path):
+                DirRemover.bytes_deleted += node_path.stat().st_size
                 os.remove(node_path)
                 DirRemover.del_counter += 1
-                bytes_deleted += node_path.stat().st_size
 
 
     @staticmethod
@@ -24,15 +24,17 @@ class DirRemover():
         files_paths = utils.get_files_from_dir(dir_path)
         for node_path in files_paths:
             if utils.is_file_dsstore(node_path):
+                DirRemover.bytes_deleted += node_path.stat().st_size
                 os.remove(node_path)
                 DirRemover.del_counter += 1
-                bytes_deleted += node_path.stat().st_size
 
 
     @staticmethod
     def cautious_remove_macfiles_dir(dir_path: Path) -> None:
+        print("DUPA imput path:", type(dir_path))
+        DirRemover.__remove_dsstore_dir(dir_path)
         macfiles_paths = utils.get_macfile_paths_dir(dir_path)
-        DirRemover.__remove_dsstore_dir(macfiles_paths)
+        print("DUPA passd argm:", type(macfiles_paths))
         paths_to_remove = []
 
         for macfile_path in macfiles_paths:
@@ -43,9 +45,9 @@ class DirRemover():
                 paths_to_remove.append(macfile_path)
 
         for macfile_path in paths_to_remove:
+            DirRemover.bytes_deleted += macfile_path.stat().st_size
             os.remove(macfile_path)
             DirRemover.del_counter += 1
-            bytes_deleted += macfile_path.stat().st_size
 
 
     @staticmethod
@@ -85,7 +87,7 @@ class DirRemover():
         del_bytes = DirRemover.get_and_reset_bytes()
 
         print(f"{del_count} appledouble files have been successfully deleted.")
-        print(f"{del_bytes}B of files have been deleted.")
+        print(f"{del_bytes}B of files have been deleted.\n\n")
 
     @staticmethod
     def print_and_reset_all_kb() -> None:
@@ -94,4 +96,4 @@ class DirRemover():
         del_kbytes = round(del_bytes / 1000)
 
         print(f"{del_count} appledouble files have been successfully deleted.")
-        print(f"{del_kbytes}kB of files have been deleted.")
+        print(f"{del_kbytes}kB of files have been deleted.\n\n")
